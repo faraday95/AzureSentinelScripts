@@ -1,0 +1,9 @@
+let startTime = ago(9h);
+let endTime = now();
+SecurityIncident
+| where TimeGenerated >= startTime
+| summarize arg_max(TimeGenerated, *) by IncidentNumber
+| where LastModifiedTime between (startTime .. endTime)
+| summarize arg_max(TimeGenerated, *) by IncidentNumber
+| extend tactics = todynamic(AdditionalData.tactics)
+| extend assignedto = todynamic(Owner.assignedTo)

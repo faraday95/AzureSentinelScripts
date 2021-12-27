@@ -1,0 +1,3 @@
+DeviceTvmSoftwareInventory
+| where SoftwareName contains "log4j"
+| project DeviceName, SoftwareName, SoftwareVersion
